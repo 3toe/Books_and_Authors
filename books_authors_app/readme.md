@@ -1,0 +1,1 @@
+A bootcamp exercise in Django where we integrate templates, ORM with many-to-many's and forms with GET and POST requests.

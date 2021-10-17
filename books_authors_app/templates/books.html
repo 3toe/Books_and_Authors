@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'styles.css' %}">
+   <title>Book Info</title>
+</head>
+<body>
+   <div id="container">
+      <h2>{{book.title}}</h2>
+      <p>ID: {{book.id}}</p>
+      <p>Description: {{book.desc}}</p>
+      <p>Author(s):</p>
+      <ul>
+         {% for author in book.authors.all %}
+         <li>{{author.fname}} {{author.lname}}</li>
+         {% endfor %}
+      </ul>
+
+      <form action="/addauthor/{{book.id}}" method="POST">
+         {% csrf_token %}
+         <h5>Add an author to this book:</h5>
+         <select name="sel_author">
+            <option hidden>select an author</option>
+            {% for author in AvailList %}
+               <option value={{author.id}}>{{author.fname}} {{author.lname}}</option>
+            {% endfor %}
+         </select>
+         <input type="Submit" value="Add" name="addauth">   
+      </form>
+      
+   </div>
+</body>
+</html>
